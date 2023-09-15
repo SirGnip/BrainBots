@@ -1,22 +1,22 @@
-# python_template Repo
-A template for new Python projects
+# brainbot Repo
+A framework to experiment with using asyncio coroutines to control 2D objects in a simulation
 
 # How to run tools against the code
 
     # create and activate virtual environment
-    python -m venv venv  # or `py -3.7 -m venv venv`
+    python -m venv venv  # or `py -3.8 -m venv venv`
     source venv/Scripts/activate
     
     # install to current environment (with current dir at top of repo) 
     pip install .     # "static" install
     pip install -e .  # "editable" install (setup.py handles source being under `src/`)
 
-    # run app from instal
-    python -m gnp
+    # run app from install
+    python -m brainbot
     
     # run app directly from local repo (with current dir at top of repo)
     cd src/
-    python -m gnp
+    python -m brainbot
     
     # run tests: path-based 
     python -m pytest tests/
@@ -33,28 +33,28 @@ A template for new Python projects
     # run linting
     pylint src/  # recurses into directory
     pylint src/ tests/
-    pylint gnp.common  # can use package names to lint what is installed
+    pylint brainbot.common  # can use package names to lint what is installed
     
     # run mypy
     mypy src/  # recurses into directory tree
-    mypy src/gnp/common/util.py
+    mypy src/brainbot/common/util.py
 
     cd src
-    mypy -p gnp
-    mypy -p gnp.common
-    mypy -m gnp.common.util
+    mypy -p brainbot
+    mypy -p brainbot.common
+    mypy -m brainbot.common.util
 
 
 # Running app from PyCharm
 
 ## Use Default Python Interpreter from PyCharm
 - For `src/`, do "Mark Directory" and set as "Sources Root" (folder turns light blue) 
-- Right click on `src/gnp/__main__.py` and choose "Run \_\_main\_\_"
+- Right click on `src/brainbot/__main__.py` and choose "Run \_\_main\_\_"
     - This relies on the Run Configuration having "Add source roots to PYTHONPATH" set to true (the default)
 
 ## Use local venv
 - Create venv
 - Install package into the venv (ex: `pip install -e .`)
 - Set venv as the project's Python interpreter in PyCharm
-- Right click on `src/gnp/__misc__.py` and choose "Run \_\_main\_\_"
+- Right click on `src/brainbot/__misc__.py` and choose "Run \_\_main\_\_"
     - Note: This does NOT rely on a Sources Root folder being set or PYTHONPATH in the Run Configuration.

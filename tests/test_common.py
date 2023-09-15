@@ -1,5 +1,5 @@
-import gnp.common.util
+import brainbot.common.util
 
 
 def test_double():
-    assert gnp.common.util.double(10) == 20
+    assert brainbot.common.util.double(10) == 20

@@ -1,5 +1,5 @@
-import gnp.app.main
+import brainbot.app.main
 
 
 def test_dummy_app():
-    assert gnp.app.main.run() is None
+    assert brainbot.app.main.run() is None
