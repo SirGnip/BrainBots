@@ -1,6 +1,15 @@
 import brainbot.common.util
+import brainbot.app.window
+import arcade
+
+SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
+SCREEN_TITLE = 'BrainBot'
 
 
 def run() -> None:
-    print(f'running app. __name__:{__name__} __file__:{__file__}')
-    print(brainbot.common.util.double(42))
+    game = brainbot.app.window.BrainBotWindow(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    game.setup()
+    arcade.run()
+
+if __name__ == '__main__':
+    run()
