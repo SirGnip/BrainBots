@@ -14,13 +14,16 @@ class BrainBotWindow(arcade.Window):
         arcade.set_background_color(arcade.color.AMAZON)
 
         self.sprites = arcade.SpriteList()
-        char = arcade.Sprite(':resources:onscreen_controls/shaded_light/up.png', 0.5)
+        char = arcade.Sprite(':resources:onscreen_controls/shaded_light/right.png', 0.5)
+        self.sprites.append(char)
+
+        char = arcade.Sprite(':resources:onscreen_controls/shaded_light/right.png', 0.5)
         char.center_x = self.width // 2
         char.center_y = self.height // 2
         char.angle = 0
         self.sprites.append(char)
 
-        char = arcade.Sprite(':resources:onscreen_controls/shaded_light/up.png', 0.5)
+        char = arcade.Sprite(':resources:onscreen_controls/shaded_light/right.png', 0.5)
         char.center_x = 150
         char.center_y = 450
         char.angle = 0
@@ -36,12 +39,15 @@ class BrainBotWindow(arcade.Window):
         """Enumerate all modules in the brain submodule and import them dynamically"""
         plugin_dir = Path(BASE_BRAIN_PATH)
         dirs = [d for d in plugin_dir.iterdir() if d.is_file() and d.stem != '__init__' and d.suffix == '.py']
+        print('Loading brain plugins...')
+        print('\n'.join([str(d) for d in dirs]))
         return [importlib.import_module('.' + d.stem, package=BASE_BRAIN_PACKAGE) for d in dirs]
 
     async def async_main(self):
         """Top level async task that owns all others"""
         asyncio.create_task(self.modules[0].think(self.sprites[0]))
         asyncio.create_task(self.modules[1].think(self.sprites[1]))
+        asyncio.create_task(self.modules[2].think(self.sprites[2]))
         await asyncio.sleep(60*60*60*24)  # sleep forever, let the tasks run
 
     def on_draw(self):
@@ -53,6 +59,8 @@ class BrainBotWindow(arcade.Window):
         if not self.async_main_task.done():
             self.async_loop.call_soon(self.async_loop.stop)
             self.async_loop.run_forever()
+
+        self.sprites.update()
 
     def on_key_press(self, key, key_modifiers):
         if key in (arcade.key.Q, arcade.key.ESCAPE):
